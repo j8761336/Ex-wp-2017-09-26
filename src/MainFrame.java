@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame{
     private Timer T1;
+    private Timer T2;
     public MainFrame(){
         initComp();
     }
@@ -49,13 +50,28 @@ public class MainFrame extends Frame{
             }
         });
 
-        T1=new Timer(50,new ActionListener(){
+        T1=new Timer(10,new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 count2++;
                 lab.setBounds(count2,50,120,30);
+                if(count2>400){
+                    count2=400;
+                    T1.stop();
+                    T2.start();
+                }
             }
         });
 
+        T2=new Timer(10,new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                count2--;
+                lab.setBounds(count2,50,120,30);
+                if(count2==0){
+                    T2.stop();
+                    T1.restart();
+                }
+            }
+        });
     }
 
 
